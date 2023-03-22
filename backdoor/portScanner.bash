@@ -9,7 +9,7 @@
 remote_host="1.1.1.5"
 remote_port=0
 
-while [true]
+while true
 do
     # Try to connect to the remote host using nc
     if nc -zv $remote_host $remote_port &> /dev/null; then
