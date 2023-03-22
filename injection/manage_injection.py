@@ -8,7 +8,7 @@ action = sys.argv[3]
 amount = sys.argv[4]
 
 # log in with existing legitimate account
-url = 'https://uscbank5/login.php?user=' + username + '&pass=' + password
+url = 'http://blue/login.php?user=' + username + '&pass=' + password
 
 r = requests.post(url) #contains cookie
 
