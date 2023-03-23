@@ -16,6 +16,7 @@ while(1):
     username = username + 1
     
     # https://www.thepythoncode.com/article/using-proxies-using-requests-in-python
+    # https://reqbin.com/code/python/9ooszjzg/python-requests-session-example#:~:text=The%20Requests%20Session%20object%20allows,as%20cookies%20and%20HTTP%20headers.
     # rotate ip address every 1000 requests
     if curRequest == 1000:
         curRequest = 0

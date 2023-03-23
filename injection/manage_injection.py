@@ -13,6 +13,6 @@ url = 'http://blue/login.php?user=' + username + '&pass=' + password
 r = requests.post(url) #contains cookie
 
 # make request to manage.php
-url_manage = 'https://uscbank5/manage.php?action=' + action + '&amount=' + amount
+url_manage = 'http://blue/manage.php?action=' + action + '&amount=' + amount
 
 r2 = requests.post(url_manage, cookies=r.cookies)
