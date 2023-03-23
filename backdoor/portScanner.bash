@@ -12,7 +12,7 @@ remote_port=0
 while true
 do
     # skips over the ssh port and the rpc port
-    if [ $remote_port == 22 || $remote_port == 111 ]; then
+    if [ $remote_port == 22 -o $remote_port == 111 ]; then
         ((remote_port++))
     fi
 
