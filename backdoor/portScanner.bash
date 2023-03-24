@@ -39,9 +39,10 @@ do
 
     ((remote_port++))
 
-    if [$remote_port -gt 65535]; then
+    if [$remote_port > 65535]; then
         break
     fi
+
 done
 
 
