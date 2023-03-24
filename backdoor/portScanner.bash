@@ -32,16 +32,12 @@ do
 
 
         # break # break out of while loop
-    # else
+    elif [ $remote_port -gt 65535 ]; then
         # echo "Connection refused on port $remote_port, trying next port."
-        
+        break
     fi
 
     ((remote_port++))
-
-    if [["$remote_port" -gt 65535]]; then
-        break
-    fi
 
 done
 
