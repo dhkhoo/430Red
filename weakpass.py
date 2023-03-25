@@ -5,8 +5,10 @@ session = requests.Session()
 ipIndex = 0
 curRequest = 0
 
-ip_addresses = requests.get('https://api.proxyscrape.com/?request=getproxies&proxytype=http&timeout=10000&country=all&ssl=all&anonymity=all')
-cur_ip = ip_addresses[ipIndex]
+# ip_addresses = requests.get('https://api.proxyscrape.com/?request=getproxies&proxytype=http&timeout=10000&country=all&ssl=all&anonymity=all')
+with open('http_proxies.txt', 'r') as f:
+    ip_addresses = f.read().splitlines()
+    cur_ip = ip_addresses[ipIndex]
 
 # read passwords from file nord-pass.csv and store in list using comma delimiter
 with open('nord-pass.csv', 'r') as f:
