@@ -1,10 +1,13 @@
 import requests
 import sys
+import random
+import string
 
 session = requests.Session()
 
-username = 0
-password = 0
+allLetters = string.ascii_letters + string.digits
+size = 8
+
 curRequest = 0
 ipIndex = 0
 
@@ -13,12 +16,13 @@ cur_ip = ip_addresses[ipIndex]
 
 # username from first command line argument, password from second
 while(1):
-    username = username + 1
+    username = ''.join(random.choices(allLetters, k=size))
+    password = ''.join(random.choices(allLetters, k=(size*2)))
     
     # https://www.thepythoncode.com/article/using-proxies-using-requests-in-python
     # https://reqbin.com/code/python/9ooszjzg/python-requests-session-example#:~:text=The%20Requests%20Session%20object%20allows,as%20cookies%20and%20HTTP%20headers.
     # rotate ip address every 1000 requests
-    if curRequest == 1000:
+    if curRequest == 500:
         curRequest = 0
         # set requests ip to the next ip in the list
         ipIndex = ipIndex + 1
