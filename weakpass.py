@@ -32,8 +32,9 @@ for username in usernames:
         
         # Send the login request and check if it was successful
         response = requests.post(url)
+        print(response.text)
         if "Login failed. Please re-check your username or password." not in response.text:
-            print("Found weak username and password: " + username + " " + password)
+            print("Found weak username and password pairing: (" + username + "," + password + ")")
         else:
             url_manage = 'http://blue/manage.php?action=close'
             r2 = requests.post(url_manage, cookies=response.cookies)
