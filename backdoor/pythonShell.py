@@ -9,7 +9,12 @@ server_address = ('1.1.1.5', PORT)
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Connect the socket to the server address and port
-sock.connect(server_address)
+try:
+    sock.connect(server_address)
+except ConnectionRefusedError:
+    print("Could not connect to the server")
+    sock.close()
+    exit()
 
 # Loop to get user commands
 while True:
@@ -23,9 +28,12 @@ while True:
     # Send the command to the server
     sock.sendall(command.encode())
 
-    # Receive the response from the server
-    response = sock.recv(1024)
-    print(response.decode())
+    # Receive the response from the server in a loop
+    while True:
+        response = sock.recv(1024).decode()
+        if not response:
+            break
+        print(response.strip())
 
 # Close the socket
 sock.close()
