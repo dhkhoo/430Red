@@ -7,6 +7,7 @@ server_address = ('1.1.1.5', PORT)
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.settimeout(5)
 
 # Connect the socket to the server address and port
 try:
@@ -30,10 +31,13 @@ while True:
 
     # Receive the response from the server in a loop
     while True:
-        response = sock.recv(1024).decode()
-        if not response:
+        try:
+            response = sock.recv(1024).decode()
+            if not response:
+                break
+            print(response.strip())
+        except socket.timeout:
             break
-        print(response.strip())
 
 # Close the socket
 sock.close()
